@@ -35,20 +35,20 @@ const closeModal = () => {
 };
 
 const handleGetItems = (product, total) => {
-    router.post(
-        route("add.transaction"),
-        {
+    router.visit(route("add.transaction"), {
+        method: "post",
+        data: {
             product: product,
             totalPrice: total,
         },
-        {
-            onSuccess: () => {
-                closeModal();
-                resetCart();
-                
-            },
-        }
-    );
+        onSuccess: () => {
+            closeModal();
+            resetCart();
+        },
+        onFinish: (visit) => {
+            visit.reload();
+        },
+    });
 };
 </script>
 
