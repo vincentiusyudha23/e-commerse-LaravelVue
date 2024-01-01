@@ -8,6 +8,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import store from './store';
 
 
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 
