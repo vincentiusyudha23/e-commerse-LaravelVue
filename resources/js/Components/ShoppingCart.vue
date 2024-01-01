@@ -45,9 +45,6 @@ const handleGetItems = (product, total) => {
             closeModal();
             resetCart();
         },
-        onFinish: (visit) => {
-            visit.reload();
-        },
     });
 };
 </script>
