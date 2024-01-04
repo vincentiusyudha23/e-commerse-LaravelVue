@@ -10,11 +10,11 @@ class Product extends Model
 {
     use HasFactory;
     protected $table = 'products';
-    protected $fillable=['name','price','stock','url_img','user_id'];
-    protected $primaryKey='product_id';
+    protected $fillable=['name','price','stock','url_img','id_user'];
+    protected $primaryKey='id';
 
     public function users(){
-        return $this->belongsTo(User::class,'user_id','id');
+        return $this->belongsTo(User::class,'id_user','id');
     }
 
 

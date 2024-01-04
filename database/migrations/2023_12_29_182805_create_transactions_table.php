@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id('id_transactions');
+            $table->id('id');
             $table->decimal('total_price',15,2);
             $table->string('invoice_number',20)->unique();
-            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('id_user')->constrained(
+                table: 'users', indexName: 'transactions_users_id'
+            )->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -10,13 +10,13 @@ class Transaction extends Model
 {
     use HasFactory;
     protected $table = 'transactions';
-    protected $fillable = ['total_price','invoice_number','user_id'];
-    protected $primaryKey = 'id_transactions';
+    protected $fillable = ['total_price','invoice_number','id_user'];
+    protected $primaryKey = 'id';
 
     public function users(){
-        return $this->belongsTo(User::class,'user_id','id');
+        return $this->belongsTo(User::class,'id_user','id');
     }
     public function producOut(){
-        return $this->hasMany(ProductOut::class,'id_transaction','id_transactions');
+        return $this->hasMany(ProductOut::class,'id_transaction','id');
     }
 }

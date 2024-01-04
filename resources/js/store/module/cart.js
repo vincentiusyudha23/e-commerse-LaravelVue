@@ -7,13 +7,13 @@ const state = {
 // getters
 const getters = {
     cartProduct: (state, getters, rootState) => {
-        return state.items.map(({ product_id, quantity }) => {
-            const product = rootState.products.all.find(product => product.product_id === product_id)
+        return state.items.map(({ id, quantity }) => {
+            const product = rootState.products.all.find(product => product.id === id)
             return {
-                product_id: product.product_id,
+                id: product.id,
                 name: product.name,
                 price: product.price,
-                tenant: product.users.name,
+                tenant: product.store_name,
                 url_img: product.url_img,
                 quantity
             }
@@ -32,9 +32,9 @@ const actions = {
     addProductToCart({ state, commit }, product) {
         commit('setCheckoutStatus', null)
         if (product.stock > 0) {
-            const cartItem = state.items.find(item => item.product_id === product.product_id)
+            const cartItem = state.items.find(item => item.id === product.id)
             if (!cartItem) {
-                commit('pushProductToCart', { product_id: product.product_id })
+                commit('pushProductToCart', { id: product.id })
             } else {
                 commit('incrementItemQty', cartItem)
             }
@@ -42,11 +42,11 @@ const actions = {
         }
     },
     removeProductFromCart({ state, commit }, product) {
-        const cartItem = state.items.find(item => item.product_id === product.product_id);
+        const cartItem = state.items.find(item => item.id === product.id);
 
         if (cartItem) {
             if (cartItem.quantity > 1) {
-                commit('decrementItemQty', { product_id: product.product_id });
+                commit('decrementItemQty', { id: product.id });
             } else {
                 commit('removeProduct', cartItem);
             }
@@ -57,25 +57,25 @@ const actions = {
         commit('setCartItems', { items: [] })
     },
     addProductItem({ commit }, product) {
-        commit('incrementItemQty', { product_id: product.product_id });
+        commit('incrementItemQty', { id: product.id });
     }
 }
 
 // mutations
 const mutations = {
-    pushProductToCart(state, { product_id }) {
+    pushProductToCart(state, { id }) {
         state.items.push({
-            product_id,
+            id,
             quantity: 1
         })
     },
 
-    incrementItemQty(state, { product_id }) {
-        const cartItem = state.items.find(item => item.product_id === product_id)
+    incrementItemQty(state, { id }) {
+        const cartItem = state.items.find(item => item.id === id)
         cartItem.quantity++;
     },
-    decrementItemQty(state, { product_id }) {
-        const cartItem = state.items.find(item => item.product_id === product_id)
+    decrementItemQty(state, { id }) {
+        const cartItem = state.items.find(item => item.id === id)
         cartItem.quantity--;
     },
     removeProduct(state, cartItem) {

@@ -49,10 +49,9 @@ class ProductController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'stock' => $request->stock,
-            'user_id'=> Auth()->user()->id,
+            'id_user'=> Auth()->user()->id,
             'url_img' => $fileName
         ]);
-
         return Redirect::route('productadd')->with('message','Succes Add Product');
 
     }
@@ -62,7 +61,7 @@ class ProductController extends Controller
      */
     public function show()
     {
-        $data = User::where('id',auth()->user()->id)->with('product')->first();
+        $data = User::where('id',auth()->user()->id)->with('Product')->first();
         return Inertia::render('Dashboard',[
             'data'=>$data
         ]);

@@ -18,6 +18,10 @@ class EmailVerificationNotificationController extends Controller
             return redirect()->intended(RouteServiceProvider::MYSTORE);
         }
 
+        $request->user()->update([
+            'store_name'=>$request->store_name
+        ]);
+
         $request->user()->sendEmailVerificationNotification();
 
         return back()->with('status', 'verification-link-sent');

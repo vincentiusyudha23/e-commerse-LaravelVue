@@ -25,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'store_name'
     ];
 
     /**
@@ -49,9 +50,9 @@ class User extends Authenticatable
     protected $primarykey = 'id';
 
     public function Product(){
-        return $this->hasMany(Product::class,'user_id','id');
+        return $this->hasMany(Product::class,'id_user','id');
     }
     public function transaction(){
-        return $this->hasMany(Transaction::class,'user_id','id');
+        return $this->hasMany(Transaction::class,'id_user','id');
     }
 }

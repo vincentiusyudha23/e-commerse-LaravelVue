@@ -57,7 +57,7 @@ store.dispatch("products/getAllProducts");
                 v-for="product in products"
                 :key="product.product_id"
                 :title="product.name"
-                :tenant="product.users.name"
+                :tenant="product.users.store_name"
                 :price="product.price"
                 :image="product.url_img"
                 :stock="product.stock"

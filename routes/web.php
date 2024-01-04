@@ -21,9 +21,7 @@ use App\Http\Controllers\TransactionController;
 Route::get('/', function(){
     return Inertia::render('Home');
 })->name('home');
-// Route::resource('/',ProductController::class);
-// Route::get('/',[ProductController::class,'index'])->name('home');
-// Route::get('/dashboard',[ProductController::class,'show'])->middleware(['auth','verified'])->name('dashboard');
+
 
 Route::get('/mystore',function(){
     return Inertia::render('Store');
@@ -38,10 +36,6 @@ Route::get('/welcome', function () {
     ]);
 });
 
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

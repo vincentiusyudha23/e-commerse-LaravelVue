@@ -70,7 +70,7 @@ const handleGetItems = (product, total) => {
             <div
                 class="w-full flex p-2 border-b-2"
                 v-for="product in cartProducts"
-                :key="product.product_id"
+                :key="product.id"
             >
                 <img :src="getImage(product.url_img)" class="w-36 rounded-md" />
                 <div class="ml-2 w-1/2">

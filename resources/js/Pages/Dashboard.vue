@@ -61,7 +61,7 @@ const submit = () => {
                     v-for="(item, index) in data.product"
                     :key="index"
                     :title="item.name"
-                    :tenant="$page.props.auth.user.name"
+                    :tenant="$page.props.auth.user.store_name"
                     :price="item.price"
                     :image="item.url_img"
                     :stock="item.stock"
@@ -69,7 +69,7 @@ const submit = () => {
                 >
                     <button
                         class="bg-indigo-500 p-2 rounded-md hover:bg-indigo-300 text-white"
-                        @click="hanleGetProduct(index, item.product_id)"
+                        @click="hanleGetProduct(index, item.id)"
                     >
                         <Icon icon="material-symbols:edit-square" width="20" />
                     </button>

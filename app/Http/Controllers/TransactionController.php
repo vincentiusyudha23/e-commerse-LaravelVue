@@ -19,15 +19,6 @@ class TransactionController extends Controller
     {
         //
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -37,54 +28,22 @@ class TransactionController extends Controller
         $total = $request->totalPrice;
         $transaction = Transaction::create([
             'total_price' => $request->totalPrice,
-            'user_id'=> Auth()->User()->id,
+            'id_user'=> Auth()->User()->id,
             'invoice_number'=>'CSR'.date('Ymd').Str::random(3)
         ]);
-
+        
         foreach ($products as $product){
-            $product_db = Product::find($product['product_id']);
+            $product_db = Product::find($product['id']);
             $product_db->stock -= $product['quantity'];
             $product_db->save();
             ProductOut::create([
-                'id_product'=>$product['product_id'],
-                'id_transaction'=>$transaction->id_transactions,
+                'id_product'=>$product['id'],
+                'id_transaction'=>$transaction->id,
                 'total_items'=>$product['quantity']
             ]);
         }
 
         return Redirect::route('home')->with('message','CheckOut Success');
 
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Transaction $transaction)
-    {
-        //
     }
 }

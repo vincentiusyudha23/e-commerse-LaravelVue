@@ -12,13 +12,13 @@ class ProductOut extends Model
     use HasFactory;
     protected $table = 'product_outs';
     protected $fillable = ['total_items','id_product','id_transaction'];
-    protected $primaryKey = 'id_product_out';
+    protected $primaryKey = 'id';
 
     public function transaction(){
-        return $this->belongsTo(Transaction::class,'id_transactions','id_transaction');
+        return $this->belongsTo(Transaction::class,'id_transaction','id');
     }
     public function product():HasOne
     {
-        return $this->hasOne(Product::class,'product_id','id_product');
+        return $this->hasOne(Product::class,'id_product','id');
     }
 }
