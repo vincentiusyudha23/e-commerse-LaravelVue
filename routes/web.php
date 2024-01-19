@@ -46,6 +46,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/dashboard/addproductTenant',[ProductController::class,'store'])->name('add.productadd');
     Route::post('/dashboard/{product}',[ProductController::class,'update'])->name('update.product');
     Route::delete('/dashboard/{product}',[ProductController::class,'destroy'])->name('delete.product');
+    Route::get('/feed',[ProductController::class,'feedProduct'])->name('feedProduct');
 });
 
 Route::post('/transaction',[TransactionController::class,'store'])->middleware('auth')->name('add.transaction');

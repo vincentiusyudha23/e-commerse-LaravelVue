@@ -52,6 +52,9 @@ const submit = () => {
         >
             {{ $page.props.flash.message }}
         </div>
+        <div class="w-full p-2 bg-white flex justify-center">
+            {{ route("feedProduct") }}
+        </div>
         <div
             class="w-full pt-5 max-h-[100%] overflow-y-scroll flex justify-center"
             v-if="data && data.product.length"

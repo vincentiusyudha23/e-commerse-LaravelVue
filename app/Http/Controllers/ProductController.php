@@ -22,6 +22,18 @@ class ProductController extends Controller
         return response()->json($data,200);
     }
 
+    public function feedProduct()
+    {
+        $products = Product::orderBy('id','desc')->get();
+        
+        $xmlContent = view('feed', ['products' => $products])->render();
+
+        // Save or send as HTTP response
+        $path = Storage::put('feed.xml',$xmlContent);
+
+        return response($xmlContent)->header('Content-Type', 'application/xml');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
