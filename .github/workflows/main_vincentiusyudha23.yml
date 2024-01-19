@@ -16,11 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -35,6 +30,20 @@ jobs:
       - name: Run composer install if composer.json exists
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
+
+      - name: Install Ziggy
+        run : composer require tightenco/ziggy && php artisan ziggy:generate
+      
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+          npm run test --if-present
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
